@@ -1,3 +1,25 @@
 {
-    "home": "You're welcome"
+    "global": {
+        "title": "The complete CRM to work your business without worrying about anything!"
+    },
+    "root": {
+        "title": "Your to-it-all application",
+        "subtitle": "Your app where you can then check your turnover and chat with yours customers.",
+        "access": "Log in to unlock the full potential of your app.",
+        "signIn": {
+            "email": "e-mail",
+            "password": "password",
+            "submit": "Send!"
+        },
+        "signUp": {
+            "name": "Name",
+            "lastName": "Last name",
+            "email": "e-mail",
+            "confirmEmail": "e-mail",
+            "businessStartDate": "Starting your business",
+            "billingStartDate": "billing start date",
+            "password": "Password",
+            "submit": "Send!"
+        }
+    }
 }

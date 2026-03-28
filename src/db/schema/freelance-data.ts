@@ -1,11 +1,12 @@
-import { numeric, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { registeredFreelanceUsers } from "./registered-freelance-users";
-import { InferSelectModel } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const freelanceData = pgTable(
     'freelance_data_table', 
     {
-        id: numeric('id').notNull().primaryKey(),
+        id: integer('id').notNull().primaryKey(),
         createdAt: timestamp('created_at').notNull().defaultNow(),
         email: text('email').notNull(),
         name: text('name'),
@@ -21,4 +22,7 @@ export const freelanceData = pgTable(
     }
 );
 
-export type freelanceDataType = InferSelectModel<typeof freelanceData>;
+export const validateFreelanceData = createInsertSchema(freelanceData);
+export const validateDBFreelanceData = createSelectSchema(freelanceData);
+export type DBFreelanceTypeInsert = InferInsertModel<typeof freelanceData>;
+export type DBFreelanceTypeSelect = InferSelectModel<typeof freelanceData>;

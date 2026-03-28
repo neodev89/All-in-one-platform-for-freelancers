@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import LoginComponent from "./login";
+import HomeComponent from "./home-component";
 
 export default async function Login({
   params,
@@ -8,6 +8,6 @@ export default async function Login({
 }) {
   const locale = await getTranslations((await params).locale);
   return (
-    <LoginComponent />
+    <HomeComponent />
   );
 }

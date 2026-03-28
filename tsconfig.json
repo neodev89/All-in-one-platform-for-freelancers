@@ -20,7 +20,10 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/sass": ["./src/sass/*"]
+      "@types/*": ["./src/@types/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@schema/*": ["./src/db/schema/*"],
+      "@zod/*": ["./src/zod/*"]
     }
   },
   "include": [

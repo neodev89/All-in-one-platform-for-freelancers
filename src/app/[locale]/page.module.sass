@@ -1,8 +1,20 @@
-@use '@/sass/variables' as var
+@use '../../sass/variables' as var
     
 .page
     position: relative
     display: flex
+    overflow: hidden
     height: 100%
     width: 100%
-    background-color: var.$blue-next
+    background-color: inherit
+    border: 2px dashed blue
+
+
+
+.access
+    color: rgb(255, 255, 255)
+    font-weight: 600 !important
+    font-size: 0.9rem !important
+
+    &:hover
+        color: var.$yellow-grad !important

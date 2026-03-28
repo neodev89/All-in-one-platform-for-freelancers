@@ -1,3 +1,25 @@
 {
-    "home": "benvenuto"
+    "global": {
+        "title": "Il CRM completo per svolgere la tua attività senza preoccuparti di nulla!"
+    },
+    "root": {
+        "title": "La tua applicazione tuttofare!",
+        "subtitle": "La tua app dove puoi controllare il tuo fatturato e chattare con i tuoi clienti.",
+        "access": "Accedi per sfruttare tutto il pontenziale dell tua App.",
+        "signIn": {
+            "email": "e-mail",
+            "password": "password",
+            "submit": "Invia!"
+        },
+        "signUp": {
+            "name": "Nome",
+            "lastName": "Cognome",
+            "email": "e-mail",
+            "confirmEmail": "e-mail",
+            "businessStartDate": "Inizio della tua attività",
+            "billingStartDate": "Data inizio fatturazione",
+            "password": "Password",
+            "submit": "Invia!"
+        }
+    }
 }
