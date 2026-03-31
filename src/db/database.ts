@@ -1,25 +1,23 @@
-import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
-import * as schema from "./schema/registered-freelance-users";
+import { Pool } from "pg";
+import { registeredFreelanceUsers } from './schema/registered-freelance-users';
+import { freelanceData } from './schema/freelance-data';
 
-// Funzione helper per garantire che la stringa ci sia
-const getPassword = (): string => {
-  const pw = process.env.SUPABASE_DB_PASSWORD;
-  if (typeof pw !== "string") {
-    // Se arrivi qui, il driver non crasha con SASL ma Nextjs ti dice perché
-    throw new Error("LA PASSWORD NON È UNA STRINGA! Valore attuale: " + typeof pw);
-  }
-  return pw;
+
+const connectionString = process.env.DATABASE_URL;
+
+const schema = {
+  registeredFreelanceUsers,
+  freelanceData,
 };
 
-export const pool = new Pool({
+// 1. Creiamo il client SQL (senza eseguire nulla)
+const pool = new Pool({
     host: process.env.SUPABASE_HOST!,
-    port: 6543,
+    port: 5432,
     user: process.env.SUPABASE_USER!,
-    password: getPassword(),
+    password: process.env.SUPABASE_DB_PASSWORD!,
     database: process.env.SUPABASE_DATABASE!,
-    ssl: { rejectUnauthorized: false },
-    max: 1,
 });
 
 export const db = drizzle(pool, { schema });

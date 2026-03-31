@@ -1,36 +1,33 @@
-import { routing } from "@/i18n/routing";
-import { getMessages, setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
+// app/users/[id]/layout.tsx
+
 import { ReactNode } from "react";
-import { NextIntlClientProvider } from 'next-intl';
+import { cookies } from "next/headers";
 
 
-export default async function LocaleRootLayout({
+export default async function UserLayout({
     children,
-    params,
+    params
 }: {
     children: ReactNode;
-    params: Promise<{ locale: string }>;
+    params: Promise<{ locale: string, users: string }>
 }) {
-    const { locale } = await params;
-    // Se vuoi mantenere la sicurezza, fai un controllo interno
-    const languages = ["en", "it"];
-    if (!languages.includes(locale)) {
-        // gestisci l'errore o usa un default
-    }
-    // Verifica che il locale sia valido
-    if (!routing.locales.includes(locale as any)) {
-        return notFound();
-    }
+    const { users } = await params;
 
-    // Abilita il rendering statico per questo locale
-    setRequestLocale(locale);
+    // Qui puoi leggere il cookie se serve
+    const token = (await cookies()).get('auth-login')?.value;
 
-    // Recupera i messaggi lato server
-    const messages = await getMessages();
     return (
-        <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
-        </NextIntlClientProvider>
-    )
+        <div className="flex min-h-screen">
+            {/* <Sidebar userId={id} /> */}
+
+            <main className="flex-1 p-6">
+                {/* <Header userId={id} /> */}
+
+                {/* Qui verranno renderizzati i componenti figli */}
+                <div className="mt-6">
+                    {children}
+                </div>
+            </main>
+        </div>
+    );
 }

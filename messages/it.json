@@ -21,5 +21,6 @@
             "password": "Password",
             "submit": "Invia!"
         }
-    }
+    },
+    "alert": "Accetta solo lettere o parole!"
 }

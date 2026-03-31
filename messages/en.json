@@ -21,5 +21,6 @@
             "password": "Password",
             "submit": "Send!"
         }
-    }
+    },
+    "alert": "Accepts only letters or words!"
 }

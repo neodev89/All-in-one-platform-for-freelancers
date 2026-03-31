@@ -5,7 +5,7 @@ interface parsedStringToNumberFuncProps {
 export const parsedStringToNumber = (props: parsedStringToNumberFuncProps): number[] | number => {
     if (Array.isArray(props.stringa)) {
         const parsed = props.stringa.map((el) => {
-            const newEl = Number(el.replace(",", "."));
+            const newEl = Number(el.trim().replace(",", "."));
             return newEl;
         });
         return parsed;

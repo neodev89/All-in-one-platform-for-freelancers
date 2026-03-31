@@ -1,17 +1,18 @@
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const registeredFreelanceUsers = pgTable(
     'register_freelance_data_table',
     {
-        id: integer('id').notNull().primaryKey(),
         createdAt: timestamp('created_at').notNull().defaultNow(),
-        email: text('email').notNull()
+        email: text('email').notNull(),
+        id: text('id').notNull().primaryKey(),
+        password: text('password').notNull(),
     }
 );
 
-export const validateFreelanceRegister = createInsertSchema(registeredFreelanceUsers);
-export const validateDBRegisterData = createSelectSchema(registeredFreelanceUsers);
+export const validateDBRegisterInsert = createInsertSchema(registeredFreelanceUsers);
+export const validateDBRegisterDataSelect = createSelectSchema(registeredFreelanceUsers);
 export type DBFreelanceRegisterTypeInsert = InferInsertModel<typeof registeredFreelanceUsers>;
 export type DBFreelanceRegisterTypeSelect = InferSelectModel<typeof registeredFreelanceUsers>;
