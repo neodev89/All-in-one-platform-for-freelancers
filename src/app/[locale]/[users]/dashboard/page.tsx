@@ -1,8 +1,10 @@
-import DashboardComponent from "./dashboard-component";
+import dynamic from "next/dynamic"
+
+const LazyDashboardComponent = dynamic(() => import("./dashboard-component"));
 
 export default async function DashBoard() {
 
     return (
-        <DashboardComponent />
+        <LazyDashboardComponent />
     )
 }

@@ -1,5 +1,9 @@
 import { getTranslations } from "next-intl/server";
-import HomeComponent from "./home-component";
+import dynamic from "next/dynamic";
+
+const LazyHomeComponent = dynamic(() => import("./home-component"), {
+  ssr: true,
+});
 
 export default async function Login({
   params,
@@ -8,6 +12,6 @@ export default async function Login({
 }) {
   const locale = await getTranslations((await params).locale);
   return (
-    <HomeComponent />
+    <LazyHomeComponent />
   );
 }

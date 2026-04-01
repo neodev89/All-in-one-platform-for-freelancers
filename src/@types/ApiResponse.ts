@@ -16,4 +16,5 @@ export interface LoginTokenPayload {
 export interface MutationConfig {
   key: string[];
   url: string;
+  enabled?: boolean;
 }

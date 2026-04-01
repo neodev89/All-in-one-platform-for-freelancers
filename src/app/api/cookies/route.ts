@@ -8,7 +8,7 @@ export async function GET() {
             return Response.json({
                 success: false,
                 message: "token scaduto o nullo",
-                data: null,
+                data: undefined,
                 status: 400,
             }, { status: 400 });
         }
@@ -25,8 +25,29 @@ export async function GET() {
         return Response.json({
             success: false,
             message: messageError,
-            data: null,
+            data: undefined,
             status: 500,
         }, { status: 500 });
     }
 };
+
+export async function DELETE() {
+    try {
+        const cookieStore = await cookies();
+
+        cookieStore.delete('auth-login');
+        return Response.json({
+            success: true,
+            message: "Token cancellato",
+            data: "",
+            status: 200,
+        }, { status: 200 });
+    } catch (error) {
+        return Response.json({
+            success: false,
+            message: "Qualcosa è andato storto nel trycatch",
+            data: undefined,
+            status: 500,
+        }, { status: 500 });
+    }
+}

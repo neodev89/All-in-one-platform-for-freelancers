@@ -3,7 +3,7 @@ import { DBFreelanceRegisterTypeInsert, registeredFreelanceUsers } from "@/db/sc
 import { eq } from "drizzle-orm";
 
 export async function controlUserIntoDb(emailUser: string): Promise<{
-    data: DBFreelanceRegisterTypeInsert | null,
+    data: DBFreelanceRegisterTypeInsert | undefined,
     success: boolean,
 }> {
     try {
@@ -13,18 +13,21 @@ export async function controlUserIntoDb(emailUser: string): Promise<{
             .where(eq(registeredFreelanceUsers.email, emailUser))
             ;
 
-        if (!foundUser) return {
-            data: null,
-            success: false,
-        };
-        return {
-            data: foundUser[0],
-            success: true,
-        };
+        if (foundUser.length === 0) {
+            return {
+                data: undefined,
+                success: false,
+            }
+        } else {
+            return {
+                data: foundUser[0],
+                success: true,
+            };
+        }
     } catch (error: any) {
         console.log("Errore nel trycatch: ", error);
         return {
-            data: null,
+            data: undefined,
             success: false,
         }
     }

@@ -8,12 +8,23 @@ import { DBFreelanceRegisterTypeInsert, validateDBRegisterInsert } from "@/db/sc
 import { useTranslations } from "next-intl";
 import { makePlaceholder } from "@/utils/makePlaceholder";
 import { useCustomMutation } from "@/tanstack/post/post-mutation";
-import { useRouter } from "next/navigation";
-import instance from "@/axios-instance/instance";
+import { usePathname, useRouter } from "next/navigation";
+import { ApiResponse } from "@/@types/ApiResponse";
+import { useGet } from "@/tanstack/get/get-mutation";
+import { useEffect, useState } from "react";
 
 export default function LoginComponent() {
     const t = useTranslations("root.signIn");
     const router = useRouter();
+    const pathname = usePathname();
+    const isDashboard = pathname.includes("/dashboard");
+
+    const [id, setId] = useState<ApiResponse<string | undefined>>({
+        success: false,
+        message: "",
+        data: undefined,
+        status: 0,
+    });
 
     const { control, watch, handleSubmit } = useForm({
         resolver: zodResolver(validateDBRegisterInsert),
@@ -26,11 +37,28 @@ export default function LoginComponent() {
 
     const login = useCustomMutation<DBFreelanceRegisterTypeInsert>(['login-key'])
 
+    const getToken = useGet<ApiResponse<string>>({
+        url: "/api/cookies",
+        key: ["get-auth-token"],
+        enabled: isDashboard,
+    });
+
+    useEffect(() => {
+        if (!getToken.isLoading) {
+            if (!getToken.data) {
+                return;
+            }
+            if (!getToken.data.data) return;
+            const idString = getToken.data.data;
+            setId(idString);
+        }
+    }, [id, getToken.data]);
+
     const handleSubmitForm = async (data: DBFreelanceRegisterTypeInsert) => {
         console.log("FORM SUBMITTED", data);
         try {
-            const getToken = await instance.get('/api/cookies');
-            const userId = JSON.parse(getToken.data.data);
+            // Genera un ID breve per l’URL
+            const publicId = Math.random().toString(36).slice(2, 10);
             login.mutate(
                 {
                     url: '/api/login',
@@ -38,18 +66,17 @@ export default function LoginComponent() {
                 },
                 {
                     onSuccess: (res) => {
-                        console.log("STATUS:", res.status);
-                        console.log("DATA:", res.data);
-                        console.log("ID UTENTE:", res.data.data);
-                        router.push(`/${userId}/dashboard`);
-                    },
-                    onError: (err) => {
-                        console.error("ERRORE MUTATION:", err);
+                        if (id === undefined) {
+                            router.push("/")
+                        }
+                        router.push(`${publicId}/dashboard`);
                     }
-                });
+                }
+            );
 
         } catch (error) {
             console.error("Errore nella chiamata client:", error);
+            router.push("/");
         }
     };
 

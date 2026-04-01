@@ -14,7 +14,7 @@ const schema = {
 // 1. Creiamo il client SQL (senza eseguire nulla)
 const pool = new Pool({
     host: process.env.SUPABASE_HOST!,
-    port: 5432,
+    port: 6543,
     user: process.env.SUPABASE_USER!,
     password: process.env.SUPABASE_DB_PASSWORD!,
     database: process.env.SUPABASE_DATABASE!,

@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 
 export default async function UserLayout({
@@ -15,6 +16,9 @@ export default async function UserLayout({
 
     // Qui puoi leggere il cookie se serve
     const token = (await cookies()).get('auth-login')?.value;
+    if (!token) {
+        return redirect("/login");
+    }
 
     return (
         <div className="flex min-h-screen">
