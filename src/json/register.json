@@ -1,0 +1,62 @@
+[
+    {
+        "id": "iduserfittizio_1",
+        "email": "luca.rossi@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:00:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_2",
+        "email": "maria.bianchi@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:05:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_3",
+        "email": "giovanni.verdi@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:10:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_4",
+        "email": "chiara.neri@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:15:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_5",
+        "email": "andrea.ferri@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:20:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_6",
+        "email": "sofia.galli@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:25:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_7",
+        "email": "marco.fontana@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:30:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_8",
+        "email": "elena.moro@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:35:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_9",
+        "email": "paolo.riva@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:40:00.000Z"
+    },
+    {
+        "id": "iduserfittizio_10",
+        "email": "giulia.serra@example.com",
+        "password": "password123",
+        "createdAt": "2026-04-01T10:45:00.000Z"
+    }
+]

@@ -12,14 +12,15 @@ export async function GET() {
                 status: 400,
             }, { status: 400 });
         }
-
+        console.log("Il token richiesto dalla API è: ", token);
+        
         return Response.json({
             success: true,
             message: "Token valido!",
             data: token,
             status: 200,
         }, { status: 200 });
-    } catch (error: any) {
+    } catch (error: Error | unknown) {
         const messageError = error instanceof Error ? error.message : error;
         console.log(messageError);
         return Response.json({
@@ -42,11 +43,11 @@ export async function DELETE() {
             data: "",
             status: 200,
         }, { status: 200 });
-    } catch (error) {
+    } catch (error: Error | unknown) {
         return Response.json({
             success: false,
             message: "Qualcosa è andato storto nel trycatch",
-            data: undefined,
+            data: error instanceof Error ? error.message : error,
             status: 500,
         }, { status: 500 });
     }

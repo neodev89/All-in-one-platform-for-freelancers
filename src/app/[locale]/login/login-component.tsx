@@ -11,7 +11,10 @@ import { useCustomMutation } from "@/tanstack/post/post-mutation";
 import { usePathname, useRouter } from "next/navigation";
 import { ApiResponse } from "@/@types/ApiResponse";
 import { useGet } from "@/tanstack/get/get-mutation";
-import { useEffect, useState } from "react";
+
+function generatePublicId(): string {
+    return Math.random().toString(36).slice(2, 10);
+}
 
 export default function LoginComponent() {
     const t = useTranslations("root.signIn");
@@ -19,14 +22,7 @@ export default function LoginComponent() {
     const pathname = usePathname();
     const isDashboard = pathname.includes("/dashboard");
 
-    const [id, setId] = useState<ApiResponse<string | undefined>>({
-        success: false,
-        message: "",
-        data: undefined,
-        status: 0,
-    });
-
-    const { control, watch, handleSubmit } = useForm({
+    const { control, handleSubmit } = useForm({
         resolver: zodResolver(validateDBRegisterInsert),
         defaultValues: {
             id: "",
@@ -42,31 +38,21 @@ export default function LoginComponent() {
         key: ["get-auth-token"],
         enabled: isDashboard,
     });
-
-    useEffect(() => {
-        if (!getToken.isLoading) {
-            if (!getToken.data) {
-                return;
-            }
-            if (!getToken.data.data) return;
-            const idString = getToken.data.data;
-            setId(idString);
-        }
-    }, [id, getToken.data]);
+    const token = getToken.data?.data;
 
     const handleSubmitForm = async (data: DBFreelanceRegisterTypeInsert) => {
         console.log("FORM SUBMITTED", data);
+        const publicId = generatePublicId();
         try {
             // Genera un ID breve per l’URL
-            const publicId = Math.random().toString(36).slice(2, 10);
             login.mutate(
                 {
                     url: '/api/login',
                     body: data,
                 },
                 {
-                    onSuccess: (res) => {
-                        if (id === undefined) {
+                    onSuccess: (_) => {
+                        if (token === undefined) {
                             router.push("/")
                         }
                         router.push(`${publicId}/dashboard`);

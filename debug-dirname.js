@@ -1,0 +1,1 @@
+console.log("DIRNAME DEL PROGETTO: ", __dirname);
