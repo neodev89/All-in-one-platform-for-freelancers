@@ -1,0 +1,12 @@
+{
+  "id": 21,
+  "createdAt": "2026-04-16T22:00:00.000Z",
+  "numInvoice": "1234",
+  "taxable": "100",
+  "vat": "0",
+  "total": "100",
+  "creationDate": "2026-04-18T22:00:00.000Z",
+  "protocolNumb": "15",
+  "taxIdCode": "00001111222",
+  "invoiceToken": "\"iduserfittizio_1\""
+}

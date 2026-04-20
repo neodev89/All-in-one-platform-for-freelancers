@@ -1,6 +1,6 @@
 'use client';
 
-import FormVariable from "@/ui/forms/form-variable";
+import CustomField from "@/ui/forms/custom-field";
 import { Box, Button, Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,7 +34,7 @@ export default function LoginComponent() {
     const login = useCustomMutation<DBFreelanceRegisterTypeInsert>(['login-key'])
 
     const getToken = useGet<ApiResponse<string>>({
-        url: "/api/cookies",
+        url: "/cookies",
         key: ["get-auth-token"],
         enabled: isDashboard,
     });
@@ -47,7 +47,7 @@ export default function LoginComponent() {
             // Genera un ID breve per l’URL
             login.mutate(
                 {
-                    url: '/api/login',
+                    url: '/login',
                     body: data,
                 },
                 {
@@ -70,7 +70,7 @@ export default function LoginComponent() {
     return (
         <Box component={'form'} onSubmit={handleSubmit(handleSubmitForm)}>
             <Stack spacing={1.5}>
-                <FormVariable
+                <CustomField
                     control={control}
                     name="email"
                     type="email"
@@ -78,7 +78,7 @@ export default function LoginComponent() {
                         arg: "email",
                     })}
                 />
-                <FormVariable
+                <CustomField
                     control={control}
                     name="password"
                     type="password"

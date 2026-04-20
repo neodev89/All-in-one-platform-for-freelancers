@@ -20,7 +20,7 @@ export const createColumns = <T extends object>({
     return Object.keys(sample).map((key) => ({
         field: key,
         headerName: replaceField(key),
-        minWidth: 150,
+        minWidth: key === "description" ? 500 : 200,
         sortable: true,
     }));
 };

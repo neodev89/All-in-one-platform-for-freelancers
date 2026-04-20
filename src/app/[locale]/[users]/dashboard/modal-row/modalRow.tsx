@@ -22,8 +22,6 @@ export default function ModalRow() {
 
     const savedRow = storage.get<DBInvoiceTypeSelect>("save-table-row");
     console.log("I dati salvati con il double click sono: ", savedRow);
-    const arraySavedROw = savedRow !== null ? [savedRow] : [];
-    console.log("I dati salvati con il double click sono: ", arraySavedROw);
 
     console.log("Il token in uso in questa sessione è: ", getToken.data);
     console.log("Il percorso è: ", pathname);
@@ -39,7 +37,7 @@ export default function ModalRow() {
             <Button color="error" onClick={() => setOpen(true)}>
                 Modale
             </Button>
-            <ModalTable open={open} setOpen={setOpen} dataRow={arraySavedROw} />
+            {savedRow && <ModalTable open={open} setOpen={setOpen} selectRow={savedRow} setSelectRow={() => {}} />}
         </div>
     )
 };

@@ -1,11 +1,11 @@
 import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { registeredFreelanceUsers } from "./registered-freelance-users";
-import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import z from "zod";
 
 export const freelanceData = pgTable(
-    'freelance_data_table', 
+    'freelance_data_table',
     {
         id: integer('id').notNull().primaryKey(),
         createdAt: timestamp('created_at').notNull().defaultNow(),
@@ -22,6 +22,15 @@ export const freelanceData = pgTable(
         )
     }
 );
+
+// questa mi permette join in automatico
+export const registeredFreelanceUsersRelations = relations(
+    registeredFreelanceUsers,
+    ({ many }) => ({
+        freelanceData: many(freelanceData),
+    })
+);
+
 
 export const validateFreelanceData = createInsertSchema(freelanceData, {
     name: z.string().nullable(),

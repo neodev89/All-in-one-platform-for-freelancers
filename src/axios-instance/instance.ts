@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+
+const base =
+  typeof window !== "undefined"
+    ? `${window.location.origin}/api`
+    : `http://localhost:3000/api`;
+
 const instance = axios.create({
-    url: `${process.env.NEXT_PUBLIC_API_URL}/api/`,
+    baseURL: base || "",
     timeout: 30000,
     headers: {
         "Content-Type": "application/json",

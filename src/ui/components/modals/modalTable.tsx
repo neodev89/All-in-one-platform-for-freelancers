@@ -26,12 +26,12 @@ export const ModalTable = ({ open, setOpen, selectRow, setSelectRow }: modalTabl
     const handleClose = () => {
         setSelectRow({
             id: -1,
-            createdAt: new Date(),
+            createdAt: "",
             numInvoice: "",
             taxable: "",
             vat: "",
             total: "",
-            creationDate: new Date(),
+            creationDate: "",
             protocolNumb: "",
             taxIdCode: "",
             invoiceToken: "",

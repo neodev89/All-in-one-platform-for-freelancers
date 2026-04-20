@@ -10,7 +10,7 @@ export const invoices = pgTable(
         createdAt: timestamp('created_at').notNull().defaultNow(),
         numInvoice: numeric('num_invoice').notNull(),
         taxable: text('taxable').notNull(),
-        vat: text('vat').notNull(),
+        vat: text('vat'),
         total: text('total').notNull(),
         creationDate: timestamp('creation_date').notNull().defaultNow(),
         protocolNumb: numeric('protocol_numb').notNull(),

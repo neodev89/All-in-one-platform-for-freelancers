@@ -3,6 +3,7 @@ import "./globals.css";
 import { WrapperQueryClientProvider } from "@/tanstack-provider/queryProvider";
 import { geistSans, geistMono } from "@/fonts-google/fonts";
 import type { Metadata } from "next";
+import { UrqlProvider } from "@/ui/components/providers/urqlProvider";
 
 
 export const metadata: Metadata = {
@@ -23,7 +24,9 @@ export default async function RootLayout({
       <body>
         {/* <PostJsonData url={"/api/freelancer/invoices"} /> */}
         <WrapperQueryClientProvider>
-          {children}
+          <UrqlProvider>
+            {children}
+          </UrqlProvider>
         </WrapperQueryClientProvider>
       </body>
     </html>

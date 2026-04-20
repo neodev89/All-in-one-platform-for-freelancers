@@ -1,10 +1,10 @@
-import { DBInvoiceTypeSelect } from "@/db/schema/invoices";
+import { DBInvoiceTable } from "./DBInvoiceTable";
 
 interface modalTableType {
     open: boolean;
     setOpen: (open: boolean) => void;
-    selectRow: DBInvoiceTypeSelect;
-    setSelectRow: (selectRow: DBInvoiceTypeSelect) => void;
+    selectRow: DBInvoiceTable;
+    setSelectRow: (selectRow: DBInvoiceTable) => void;
 }
 
 export type {

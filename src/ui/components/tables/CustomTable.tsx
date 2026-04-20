@@ -3,7 +3,7 @@
 import { tables } from "@/@types/custom-table"
 import { Box } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 
 export const CustomTable = <T extends object>({
     columns, rows, onRowDoubleClick,
@@ -12,17 +12,15 @@ export const CustomTable = <T extends object>({
     const [page, setPage] = useState<number>(0);
     const [pageSize, setPageSize] = useState<number>(5);
 
-    const memoColumns = useMemo(() => columns, [columns]);
-    const memoRows = useMemo(() => rows, [rows]);
-
     return (
         <Box sx={{
-            height: '400px',
+            height: '500px',
+            maxHeight: '80%',
             width: '100%',
         }}>
             <DataGrid
-                columns={memoColumns}
-                rows={memoRows}
+                columns={columns}
+                rows={rows}
                 paginationModel={{ page, pageSize }}
                 sortingMode="server"
                 onPaginationModelChange={(model) => {

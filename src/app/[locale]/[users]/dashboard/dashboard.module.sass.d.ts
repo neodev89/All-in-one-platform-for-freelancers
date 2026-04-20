@@ -4,6 +4,7 @@ const styles: {
     table: string;
     boxTable: string;
     footerDashboard: string;
+    link: string;
 };
 
 export default styles;

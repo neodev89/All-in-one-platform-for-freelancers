@@ -1,15 +1,18 @@
 "use client";
 
+import { usePathname } from "@/i18n/navigation";
 import { useGet } from "@/tanstack/get/get-mutation";
 import { useEffect, useState } from "react";
 
 
-export function useCallWebSocket<T extends Record<string, unknown>>(urlWs: string): {
+export function useCallWebSocket<T,>(urlWs: string): {
   data: T[];
   token: string | null;
 } {
   const [data, setData] = useState<Array<T>>([]);
   const [token, setToken] = useState<string | null>(null);
+  const pathname = usePathname();
+  console.log("la route è: ", pathname.includes("dashboard"));
 
   const getToken = useGet<string>({
     url: '/api/cookies',
@@ -19,6 +22,7 @@ export function useCallWebSocket<T extends Record<string, unknown>>(urlWs: strin
 
   useEffect(() => {
     if (!getToken.data?.data) return;
+    if (!pathname.includes("dashboard")) return;
 
     const userToken = getToken.data.data;
     const parsedUserToken = JSON.parse(userToken);

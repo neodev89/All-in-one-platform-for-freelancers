@@ -129,7 +129,7 @@ export async function POST(req: Request) {
                 status: 404,
             }, { status: 404 });
         }
-    } catch (err: any) {
+    } catch (err: Error | unknown) {
         console.log("Errore nel trycatch: ", err);
         return Response.json({
             success: false,

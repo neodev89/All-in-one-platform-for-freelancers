@@ -1,6 +1,6 @@
 import { ApiResponse } from "@/@types/ApiResponse";
 import { db } from "@/db/database";
-import { DBInvoiceTypeSelect, invoices, validateDBInvoicesSelect } from "@/db/schema/invoices";
+import { DBInvoiceTypeSelect, invoices } from "@/db/schema/invoices";
 import { eq } from "drizzle-orm";
 
 export async function GET(user: string) {
@@ -35,8 +35,8 @@ export async function GET(user: string) {
             response,
             { status: 200 },
         );
-    } catch (error: any) {
-        const response: ApiResponse<any> = {
+    } catch (error: Error | unknown) {
+        const response: ApiResponse<Error | unknown> = {
                 success: false,
                 message: "Il database è vuoto",
                 data: error instanceof Error ? error.message : error,
